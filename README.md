@@ -6,7 +6,7 @@ Cypherer bot api
 
 ```js
 fetch('http://localhost:60000/api/crypt', {
-   method: 'POST', // or 'PUT'
+   method: 'POST',
    headers: {
     'Content-Type': 'application/json',
   },
