@@ -1,0 +1,20 @@
+{
+  "name": "crypter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "custom-translate": "^2.2.8",
+    "express": "^4.17.2",
+    "fs": "^0.0.1-security",
+    "http": "^0.0.1-security",
+    "node-fetch": "^2.6.1"
+  }
+}
