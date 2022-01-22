@@ -17,39 +17,49 @@ app.get('/', (req, res) => {
     res.end();
 });
 
-app.post('/api/crypter/atbash', (req, res) => {
-    res.status(418).send(JSON.stringify({
-        text: letterTrans(req.body.text, atbash)
-    }))
-})
+app.post('/api/crypt', (req, res) => {
+    if (!req.body.type || !req.body.type == ['atbash', 'morse', 'rot', 'kenny']) return res.json({ status: 'err' })
+    try {
+        if (req.body.type == 'atbash') {
+            res.json({
+                status: 'success',
+                text: letterTrans(req.body.text, atbash)
+            })
+        }
 
-app.post('/api/crypter/kenny', (req, res) => {
-    res.status(418).send(JSON.stringify({
-        text: letterTrans(req.body.text, kenny)
-    }))
-})
+        if (req.body.type == 'morse') {
+            res.json({
+                status: 'success',
+                text: letterTrans(req.body.text, morse)
+            })
+        }
 
-app.post('/api/crypter/morse', (req, res) => {
-    res.status(418).send(JSON.stringify({
-        text: letterTrans(req.body.text, morse)
-    }))
-})
+        if (req.body.type == 'rot') {
+            res.json({
+                status: 'success',
+                text: letterTrans(req.body.text, rot)
+            })
+        }
 
-app.post('/api/crypter/rot', (req, res) => {
-    res.status(418).send(JSON.stringify({
-        text: letterTrans(req.body.text, rot)
-    }))
+        if (req.body.type == 'kenny') {
+            res.json({
+                status: 'success',
+                text: letterTrans(req.body.text, kenny)
+            })
+        }
+    } catch {
+        res.json({ status: 'err' })
+    }
 })
-
 
 http.listen(port, function () {
     console.log(`Listening on: http://localhost:${port}/`);
-    fetch('http://localhost:60000/api/crypter/morse', {
+    fetch('http://localhost:60000/api/crypt', {
   method: 'POST', // or 'PUT'
   headers: {
     'Content-Type': 'application/json',
   },
-body: JSON.stringify({ text: "morse" })
+body: JSON.stringify({ type: 'morse', text: "Ciao Come va?" })
 })
 .then(response => response.json())
 .then(data => console.log(data));
